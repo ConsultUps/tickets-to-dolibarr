@@ -42,7 +42,7 @@ function wpcf7_add_text_to_mail_body($contact_form){
             $url = "https://erp.consultups.tech/api/index.php/thirdparties?sortfield=t.rowid&sortorder=ASC&limit=1&sqlfilters=(t.phone%3Alike%3A'".$phone."')";
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('DOLAPIKEY: r26sfbjk'));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('DOLAPIKEY: ********'));
             ob_start();
 
             $result = curl_exec($ch);
@@ -77,7 +77,7 @@ function wpcf7_add_text_to_mail_body($contact_form){
 
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array('DOLAPIKEY: r26sfbjk'));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('DOLAPIKEY: ********'));
                 ob_start();
 
                 $result = curl_exec($ch);
