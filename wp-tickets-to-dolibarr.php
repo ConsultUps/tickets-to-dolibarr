@@ -30,49 +30,19 @@ add_action( 'wpcf7_before_send_mail', 'wpcf7_add_text_to_mail_body' );
 function wpcf7_add_text_to_mail_body($contact_form){
     if($contact_form->id == 750){
         $contact_form->skip_mail = true;
-        $fp = fopen('data.txt', 'w');
-        //fwrite($fp, $contact_form->id());
-        //$wpcf7      = WPCF7_ContactForm::get_current();
         $submission = WPCF7_Submission::get_instance();
 
         if($submission){
             $data = $submission->get_posted_data();
-            //fwrite($fp, $data["phone"]);
-
-
-            // CREAR TERCERO SI NO EXISTE
-            /*$url = "https://erp.consultups.tech/api/index.php/thirdparties?sortfield=t.rowid&sortorder=ASC&limit=1&sqlfilters=(t.phone%3Alike%3A'".$data['phone']."')";
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, 'DOLAPIKEY: r26sfbjk');
-            $result = curl_exec($ch);
-
-            var_dump($result);*/
-//            $solicitud->subject = "duda";
-//            $solicitud->message = $data["asunto"]." ".$data["phone"];
-//            $solicitud->name = $data["nombre"];
-//            $solicitud = json_encode($solicitud);
-//            fwrite($fp, $solicitud);
 
             $message = $data["asunto"];
             $phone = $data["phone"];
             $name = $data["nombre"];
 
-
-
-
-
-
-
-
-
-
             $url = "https://erp.consultups.tech/api/index.php/thirdparties?sortfield=t.rowid&sortorder=ASC&limit=1&sqlfilters=(t.phone%3Alike%3A'".$phone."')";
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('DOLAPIKEY: r26sfbjk'));
-//header('Content-type: application/json');
             ob_start();
 
             $result = curl_exec($ch);
@@ -91,9 +61,6 @@ function wpcf7_add_text_to_mail_body($contact_form){
 
                 $solicitud = json_encode($solicitud);
 
-                fwrite($fp,$solicitud);
-
-
                 $url = "https://erp.consultups.tech/api/index.php/thirdparties";
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $url);
@@ -111,7 +78,6 @@ function wpcf7_add_text_to_mail_body($contact_form){
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $url);
                 curl_setopt($ch, CURLOPT_HTTPHEADER, array('DOLAPIKEY: r26sfbjk'));
-                //header('Content-type: application/json');
                 ob_start();
 
                 $result = curl_exec($ch);
@@ -131,9 +97,6 @@ function wpcf7_add_text_to_mail_body($contact_form){
             $id = (int)$content->ref;
             $name = $content->name;
             $phone = $content->phone;
-            //var_dump($content);
-            //echo $id;
-            //echo $content[0]->phone;
 
             $solicitud = [
                 "subject" => "Solicitud automática - WordPress",
@@ -155,31 +118,8 @@ function wpcf7_add_text_to_mail_body($contact_form){
             $result = curl_exec($ch);
 
             curl_close($ch);
-            // echo $solicitud;
-
-
 
             return $content;
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
-
-
-
-        //$phone = strtolower($contact_form->prop('phone'));
-
-        fclose($fp);
     }
-
 }
