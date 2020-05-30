@@ -65,7 +65,7 @@ function wpcf7_add_text_to_mail_body($contact_form){
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $url);
                 curl_setopt( $ch, CURLOPT_POSTFIELDS, $solicitud );
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Accept: application/json', 'DOLAPIKEY: r26sfbjk'));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Accept: application/json', 'DOLAPIKEY: ********'));
                 curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 
                 $result = curl_exec($ch);
